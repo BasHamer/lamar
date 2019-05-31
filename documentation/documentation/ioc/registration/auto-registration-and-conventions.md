@@ -143,6 +143,11 @@ method. This functionality is *recursive*, meaning that assembly scanning declar
 `ServiceRegistry` types discovered through `LookForRegistries()` will also be processed.
 
 
-<[sample:scan-for-registries]>
+## scanning cross-platform in .net core
 
+<[warning]>
+Using commands like AssembliesFromApplicationBaseDirectory() will scan different DLL's on a windowns compilation of your project than a non-windows based compilation, for instance on Docker. This is because of the different files that are put into the ouptut directory. 
+<[/warning]>
 
+Make sure that you only scan the assemblies that you intend to scan when deploying to a Docker container. A failure to do this will possibly manifest into this error:
+Detected some kind of bi-directional dependency while trying to discover and plan a missing service registration. Examining types: SomeType, etc.
